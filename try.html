@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accessible Job Opportunities for Disabled Students</title>
+    <style>
+        :root {
+            --primary: #3498db;
+            --secondary: #2980b9;
+            --accent: #e74c3c;
+            --light: #f9f9f9;
+            --dark: #333;
+            --success: #2ecc71;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+        
+        .search-container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .search-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .search-input {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        input, select, button {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: var(--secondary);
+        }
+        
+        .filter-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .filter-group {
+            flex: 1;
+            min-width: 150px;
+        }
+        
+        .job-listings {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .job-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .job-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .job-title {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .job-company {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .job-location {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .job-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+        
+        .tag {
+            background-color: #eaeaea;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+        
+        .accessibility-tag {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .cta-button {
+            background-color: var(--primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            border-radius: 4px;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        
+        .pagination button {
+            width: auto;
+            margin: 0 0.25rem;
+        }
+        
+        .loader {
+            text-align: center;
+            padding: 2rem;
+            display: none;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .accessibility-menu {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: white;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            z-index: 100;
+        }
+        
+        .accessibility-panel {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            background-color: white;
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+            display: none;
+        }
+        
+        .accessibility-panel.active {
+            display: block;
+        }
+        
+        .accessibility-option {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* High contrast mode */
+        body.high-contrast {
+            background-color: black;
+            color: white;
+        }
+        
+        body.high-contrast .job-card,
+        body.high-contrast .search-container,
+        body.high-contrast input,
+        body.high-contrast select {
+            background-color: black;
+            color: white;
+            border: 1px solid white;
+        }
+        
+        body.high-contrast .job-title {
+            color: yellow;
+        }
+        
+        /* Larger text mode */
+        body.large-text {
+            font-size: 1.2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .search-row {
+                flex-direction: column;
+            }
+            
+            .job-listings {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Accessible Job Opportunities for Disabled Students</h1>
+        <p>Find inclusive job opportunities tailored for your skills and accessibility needs</p>
+    </header>
+    
+    <div class="container">
+        <section class="search-container">
+            <h2>Find Your Next Opportunity</h2>
+            <div class="search-row">
+                <div class="search-input">
+                    <input type="text" id="keyword-search" placeholder="Job title, skill, or keyword">
+                </div>
+                <div class="search-input">
+                    <input type="text" id="location-search" placeholder="City, state, or remote">
+                </div>
+                <div class="search-input" style="max-width: 200px;">
+                    <button id="search-button">Search Jobs</button>
+                </div>
+            </div>
+            <div class="filter-options">
+                <div class="filter-group">
+                    <label for="job-type">Job Type</label>
+                    <select id="job-type">
+                        <option value="">All Types</option>
+                        <option value="full-time">Full-time</option>
+                        <option value="part-time">Part-time</option>
+                        <option value="internship">Internship</option>
+                        <option value="contract">Contract</option>
+                        <option value="remote">Remote</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="experience-level">Experience Level</label>
+                    <select id="experience-level">
+                        <option value="">All Levels</option>
+                        <option value="entry">Entry Level</option>
+                        <option value="mid">Mid-Level</option>
+                        <option value="senior">Senior Level</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="accessibility-features">Accessibility Features</label>
+                    <select id="accessibility-features">
+                        <option value="">All Features</option>
+                        <option value="screen-reader">Screen Reader Compatible</option>
+                        <option value="physical">Physical Accessibility</option>
+                        <option value="flexible">Flexible Schedule</option>
+                        <option value="sensory">Sensory Accommodations</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="job-source">Job Source</label>
+                    <select id="job-source">
+                        <option value="">All Sources</option>
+                        <option value="indeed">Indeed</option>
+                        <option value="linkedin">LinkedIn</option>
+                        <option value="glassdoor">Glassdoor</option>
+                        <option value="usajobs">USAJobs</option>
+                        <option value="specialized">Specialized Platforms</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+        
+        <div class="loader" id="loader">
+            <h3>Searching for jobs...</h3>
+            <p>This may take a moment as we search multiple sources</p>
+        </div>
+        
+        <div class="no-results" id="no-results">
+            <h3>No jobs found matching your criteria</h3>
+            <p>Try adjusting your search terms or filters</p>
+        </div>
+        
+        <section class="job-listings" id="job-listings">
+            <!-- Job listings will be dynamically inserted here -->
+        </section>
+        
+        <div class="pagination" id="pagination">
+            <button id="prev-page" disabled>Previous</button>
+            <span id="page-info">Page 1 of 1</span>
+            <button id="next-page" disabled>Next</button>
+        </div>
+    </div>
+    
+    <div class="accessibility-menu" id="accessibility-toggle">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M12 8v8"></path>
+            <path d="M8 12h8"></path>
+        </svg>
+    </div>
+    
+    <div class="accessibility-panel" id="accessibility-panel">
+        <h3>Accessibility Options</h3>
+        <div class="accessibility-option">
+            <input type="checkbox" id="high-contrast">
+            <label for="high-contrast">High Contrast Mode</label>
+        </div>
+        <div class="accessibility-option">
+            <input type="checkbox" id="large-text">
+            <label for="large-text">Larger Text</label>
+        </div>
+        <div class="accessibility-option">
+            <input type="checkbox" id="screen-reader-mode">
+            <label for="screen-reader-mode">Screen Reader Optimized</label>
+        </div>
+    </div>
+    
+    <footer>
+        <p>© 2025 Accessible Job Search Platform for Disabled Students</p>
+        <p><a href="#" style="color: white;">About Us</a> | <a href="#" style="color: white;">Privacy Policy</a> | <a href="#" style="color: white;">Contact</a></p>
+    </footer>
+
+    <script>
+        // Demo data for job listings - In a real application, this would come from your web scraping backend
+        const jobSources = {
+            indeed: {
+                name: "Indeed",
+                url: "https://www.indeed.com"
+            },
+            linkedin: {
+                name: "LinkedIn",
+                url: "https://www.linkedin.com/jobs"
+            },
+            glassdoor: {
+                name: "Glassdoor",
+                url: "https://www.glassdoor.com"
+            },
+            usajobs: {
+                name: "USAJobs",
+                url: "https://www.usajobs.gov"
+            },
+            simplyhired: {
+                name: "SimplyHired",
+                url: "https://www.simplyhired.com"
+            }
+        };
+
+        // Sample job listings for demonstration
+        const sampleJobs = [
+            {
+                id: 1,
+                title: "Web Developer - Accessible UI Focus",
+                company: "Inclusive Tech Solutions",
+                location: "Remote",
+                type: "full-time",
+                experience: "mid",
+                description: "Looking for a web developer with experience in creating accessible user interfaces. You'll be working on projects focused on compliance with WCAG 2.1 standards.",
+                tags: ["Web Development", "JavaScript", "Accessibility"],
+                accessibilityFeatures: ["screen-reader", "flexible"],
+                source: "linkedin",
+                datePosted: "2025-03-30"
+            },
+            {
+                id: 2,
+                title: "Administrative Assistant - Flexible Schedule",
+                company: "Global Innovations Inc.",
+                location: "New York, NY",
+                type: "part-time",
+                experience: "entry",
+                description: "Administrative role with flexible scheduling options. Strong organizational skills required. Company offers robust accommodation program.",
+                tags: ["Administrative", "MS Office", "Organization"],
+                accessibilityFeatures: ["physical", "flexible", "sensory"],
+                source: "indeed",
+                datePosted: "2025-04-01"
+            },
+            {
+                id: 3,
+                title: "Data Analyst Internship",
+                company: "DataVision Analytics",
+                location: "Remote",
+                type: "internship",
+                experience: "entry",
+                description: "Internship opportunity for students interested in data analysis. Training provided on accessible analytics tools.",
+                tags: ["Data Analysis", "Excel", "SQL"],
+                accessibilityFeatures: ["screen-reader", "flexible"],
+                source: "glassdoor",
+                datePosted: "2025-03-28"
+            },
+            {
+                id: 4,
+                title: "Customer Service Representative",
+                company: "Support Solutions",
+                location: "Chicago, IL (Hybrid)",
+                type: "full-time",
+                experience: "entry",
+                description: "Customer service role with comprehensive training. Office is fully accessible and accommodations are readily available.",
+                tags: ["Customer Service", "Communication", "Problem Solving"],
+                accessibilityFeatures: ["physical", "sensory"],
+                source: "simplyhired",
+                datePosted: "2025-04-02"
+            },
+            {
+                id: 5,
+                title: "Social Media Coordinator",
+                company: "Creative Digital Agency",
+                location: "Remote",
+                type: "part-time",
+                experience: "mid",
+                description: "Coordinate social media campaigns with focus on inclusive content. Flexible working hours available.",
+                tags: ["Social Media", "Marketing", "Content Creation"],
+                accessibilityFeatures: ["screen-reader", "flexible"],
+                source: "linkedin",
+                datePosted: "2025-03-25"
+            },
+            {
+                id: 6,
+                title: "Software Engineering - Government Sector",
+                company: "US Department of Technology",
+                location: "Washington, DC",
+                type: "full-time",
+                experience: "senior",
+                description: "Software engineering position with the federal government. Excellent benefits and accommodation policies.",
+                tags: ["Java", "Python", "Government"],
+                accessibilityFeatures: ["physical", "screen-reader", "sensory"],
+                source: "usajobs",
+                datePosted: "2025-03-27"
+            }
+        ];
+
+        // State management
+        let currentJobs = [];
+        let currentPage = 1;
+        const jobsPerPage = 6;
+        
+        // DOM elements
+        const jobListings = document.getElementById('job-listings');
+        const loader = document.getElementById('loader');
+        const noResults = document.getElementById('no-results');
+        const pagination = document.getElementById('pagination');
+        const pageInfo = document.getElementById('page-info');
+        const prevPageBtn = document.getElementById('prev-page');
+        const nextPageBtn = document.getElementById('next-page');
+        
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set up event listeners
+            document.getElementById('search-button').addEventListener('click', searchJobs);
+            document.getElementById('accessibility-toggle').addEventListener('click', toggleAccessibilityPanel);
+            document.getElementById('high-contrast').addEventListener('change', toggleHighContrast);
+            document.getElementById('large-text').addEventListener('change', toggleLargeText);
+            document.getElementById('screen-reader-mode').addEventListener('change', toggleScreenReaderMode);
+            
+            prevPageBtn.addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    displayJobs();
+                }
+            });
+            
+            nextPageBtn.addEventListener('click', () => {
+                const maxPages = Math.ceil(currentJobs.length / jobsPerPage);
+                if (currentPage < maxPages) {
+                    currentPage++;
+                    displayJobs();
+                }
+            });
+            
+            // Initial job search
+            searchJobs();
+        });
+
+        // Function to search for jobs (simulated)
+        function searchJobs() {
+            const keywords = document.getElementById('keyword-search').value.toLowerCase();
+            const location = document.getElementById('location-search').value.toLowerCase();
+            const jobType = document.getElementById('job-type').value;
+            const experienceLevel = document.getElementById('experience-level').value;
+            const accessibilityFeatures = document.getElementById('accessibility-features').value;
+            const jobSource = document.getElementById('job-source').value;
+            
+            // Show loader
+            jobListings.innerHTML = '';
+            loader.style.display = 'block';
+            noResults.style.display = 'none';
+            
+            // Simulate API request delay
+            setTimeout(() => {
+                // Filter jobs based on search criteria
+                currentJobs = sampleJobs.filter(job => {
+                    // Check keywords
+                    const keywordMatch = !keywords || 
+                        job.title.toLowerCase().includes(keywords) || 
+                        job.company.toLowerCase().includes(keywords) || 
+                        job.description.toLowerCase().includes(keywords) ||
+                        job.tags.some(tag => tag.toLowerCase().includes(keywords));
+                    
+                    // Check location
+                    const locationMatch = !location || 
+                        job.location.toLowerCase().includes(location);
+                    
+                    // Check job type
+                    const typeMatch = !jobType || 
+                        job.type === jobType;
+                    
+                    // Check experience level
+                    const experienceMatch = !experienceLevel || 
+                        job.experience === experienceLevel;
+                    
+                    // Check accessibility features
+                    const accessibilityMatch = !accessibilityFeatures || 
+                        job.accessibilityFeatures.includes(accessibilityFeatures);
+                    
+                    // Check job source
+                    const sourceMatch = !jobSource || 
+                        job.source === jobSource;
+                    
+                    return keywordMatch && locationMatch && typeMatch && experienceMatch && accessibilityMatch && sourceMatch;
+                });
+                
+                // Reset to first page
+                currentPage = 1;
+                
+                // Display results
+                displayJobs();
+                
+                // Hide loader
+                loader.style.display = 'none';
+            }, 1000);
+        }
+
+        // Function to display jobs
+        function displayJobs() {
+            jobListings.innerHTML = '';
+            
+            if (currentJobs.length === 0) {
+                noResults.style.display = 'block';
+                pagination.style.display = 'none';
+                return;
+            }
+            
+            // Calculate pagination
+            const startIndex = (currentPage - 1) * jobsPerPage;
+            const endIndex = Math.min(startIndex + jobsPerPage, currentJobs.length);
+            const maxPages = Math.ceil(currentJobs.length / jobsPerPage);
+            
+            // Update pagination controls
+            pageInfo.textContent = `Page ${currentPage} of ${maxPages}`;
+            prevPageBtn.disabled = currentPage === 1;
+            nextPageBtn.disabled = currentPage === maxPages;
+            pagination.style.display = maxPages > 1 ? 'flex' : 'none';
+            
+            // Create job cards
+            for (let i = startIndex; i < endIndex; i++) {
+                const job = currentJobs[i];
+                
+                const jobCard = document.createElement('div');
+                jobCard.className = 'job-card';
+                jobCard.setAttribute('aria-labelledby', `job-title-${job.id}`);
+                
+                // Calculate days since posting
+                const postDate = new Date(job.datePosted);
+                const today = new Date();
+                const daysAgo = Math.floor((today - postDate) / (1000 * 60 * 60 * 24));
+                
+                jobCard.innerHTML = `
+                    <h3 class="job-title" id="job-title-${job.id}">${job.title}</h3>
+                    <span class="job-company">${job.company}</span>
+                    <span class="job-location">${job.location}</span>
+                    <p>${job.description}</p>
+                    <div class="job-tags">
+                        ${job.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                        ${job.accessibilityFeatures.map(feature => {
+                            let featureName = "";
+                            switch(feature) {
+                                case "screen-reader": featureName = "Screen Reader Compatible"; break;
+                                case "physical": featureName = "Physical Accessibility"; break;
+                                case "flexible": featureName = "Flexible Schedule"; break;
+                                case "sensory": featureName = "Sensory Accommodations"; break;
+                            }
+                            return `<span class="tag accessibility-tag">${featureName}</span>`;
+                        }).join('')}
+                    </div>
+                    <p><small>Posted ${daysAgo} days ago on ${jobSources[job.source].name}</small></p>
+                    <a href="${jobSources[job.source].url}" class="cta-button" target="_blank" rel="noopener">View Job</a>
+                `;
+                
+                jobListings.appendChild(jobCard);
+            }
+            
+            noResults.style.display = 'none';
+        }
+
+        // Accessibility functions
+        function toggleAccessibilityPanel() {
+            const panel = document.getElementById('accessibility-panel');
+            panel.classList.toggle('active');
+        }
+        
+        function toggleHighContrast(e) {
+            document.body.classList.toggle('high-contrast', e.target.checked);
+        }
+        
+        function toggleLargeText(e) {
+            document.body.classList.toggle('large-text', e.target.checked);
+        }
+        
+        function toggleScreenReaderMode(e) {
+            // Add screen reader optimizations here
+            if (e.target.checked) {
+                document.querySelectorAll('.job-card').forEach(card => {
+                    card.setAttribute('tabindex', '0');
+                });
+            } else {
+                document.querySelectorAll('.job-card').forEach(card => {
+                    card.removeAttribute('tabindex');
+                });
+            }
+        }
+
+        // In a real application, you would add functions for:
+        // 1. Making API calls to your backend scraping service
+        // 2. Handling user authentication for saved jobs
+        // 3. Tracking application status
+        // 4. Implementing more robust error handling
+    </script>
+</body>
+</html>
