@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accessible Job Opportunities for Disabled Students</title>
+    <style>
+        :root {
+    --primary-color: #1E2A47; /* Deep blue for a corporate, professional look */
+    --secondary-color: #4D5B8B; /* Muted secondary blue */
+    --accent-color: #FF6F61; /* Bold accent color for CTAs */
+    --background-light: #F9FAFB; /* Clean, light background */
+    --background-dark: #2C3E50; /* Dark background for the header/footer */
+    --success-color: #28A745; /* Green for success messages */
+    --text-light: #7B8794; /* Darker grey for better readability */
+    --border-color: #E4E7EC; /* Subtle borders */
+    --shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--background-light);
+    color: #333;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+header {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: #fff;
+    padding: 2.5rem 0;
+    text-align: center;
+    font-size: 2.2rem;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+  width: 92%;
+  max-width: 1300px;
+  margin: 3rem auto;
+  padding: 0 1rem;
+}
+
+.search-container {
+  background-color: #fff;
+  padding: 3.5rem;
+  margin-bottom: 3.5rem;
+  border-radius: 15px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border-color);
+  overflow: visible;
+  position: relative;
+  width: 100%;
+}
+
+/* Fix for container and search container */
+.container {
+  width: 92%;
+  max-width: 1300px;
+  margin: 3rem auto;
+  padding: 0 1rem;
+}
+
+.search-container {
+  background-color: #fff;
+  padding: 3.5rem;
+  margin-bottom: 3.5rem;
+  border-radius: 15px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border-color);
+  overflow: visible;
+  position: relative;
+  width: 100%;
+}
+
+/* Ensure search rows display properly */
+.search-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+/* Fixed input field size */
+.search-input {
+  flex: 1 1 250px;
+  position: relative;
+}
+#keyword-search,
+#location-search {
+  width: 100%;
+  height: 60px;
+  padding: 1.2rem;
+  border: 2px solid var(--border-color);
+  border-radius: 10px;
+  font-size: 1.2rem;
+  transition: var(--transition);
+  box-sizing: border-box;
+}
+.search-input button {
+  width: 100%;
+  height: 60px;
+  margin: 0;
+}
+@media (max-width: 768px) {
+  .search-row {
+    flex-direction: column;
+  }
+  
+  .search-input {
+    flex: 1 1 100%;
+    max-width: 100% !important;
+  }
+  
+  .search-input button {
+    width: 100%;
+  }
+}
+.search-select {
+    flex: 1 1 250px;
+    padding: 1.2rem;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    font-size: 1.2rem;
+    transition: var(--transition);
+    width: 100%;
+    height: 60px; /* Specific height for input fields */
+}
+
+/* All input elements and select elements */
+input[type="text"],
+input[type="search"],
+input[type="email"],
+input[type="password"],
+select {
+    height: 60px; /* Fixed height for all input elements */
+    padding: 0 1.2rem;
+    font-size: 1.2rem;
+    width: 100%; /* Make inputs fill their containers */
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    background-color: #fff;
+}
+
+/* Specific fix for the search form fields */
+#job-search-form input,
+#job-search-form select {
+    height: 60px;
+    min-height: 60px;
+    font-size: 1.2rem;
+    width: 100%;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+}
+
+.search-input:focus,
+.search-select:focus,
+input:focus,
+select:focus {
+    border-color: var(--accent-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 111, 97, 0.2);
+}
+
+button {
+    background: linear-gradient(135deg, var(--accent-color) 0%, #FF8A7E 100%);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 1.2rem 2.5rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: var(--transition);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 8px rgba(255, 111, 97, 0.3);
+    height: 60px; /* Match height with input fields */
+}
+
+button:hover {
+    background: linear-gradient(135deg, #E85A47 0%, #FF7E6D 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(255, 111, 97, 0.4);
+}
+
+.filter-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.filter-group {
+    flex: 1 1 200px;
+    padding: 1.2rem;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+}
+
+.filter-group h3 {
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.filter-group select {
+    width: 100%;
+    height: 50px; /* Slightly smaller height for filter selects */
+}
+
+.job-listings {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2.5rem;
+    margin-top: 3rem;
+}
+
+/* Enhanced job card spacing and alignment */
+.job-card {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    min-height: 480px;
+    box-sizing: border-box;
+    position: relative;
+    gap: 1rem; /* added spacing between internal sections */
+}
+
+.job-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, var(--accent-color) 0%, var(--secondary-color) 100%);
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+/* Ensures all child elements are aligned consistently */
+.job-card-header {
+    margin-bottom: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.job-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    line-height: 1.3;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    max-height: 4rem;
+}
+
+.job-company {
+    font-size: 1.1rem;
+    color: var(--secondary-color);
+    font-weight: 500;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.job-location {
+    font-size: 1rem;
+    color: var(--text-light);
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    gap: 0.5rem;
+}
+
+.job-location::before {
+    content: '📍';
+    flex-shrink: 0;
+}
+
+/* Job content description and tags spacing */
+.job-card-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 1rem;
+}
+
+.job-description {
+    line-height: 1.6;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    max-height: 4.8rem;
+    color: #555;
+}
+
+.job-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: auto;
+}
+
+.tag {
+    background-color: #F3F4F7;
+    padding: 0.4rem 1rem;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: var(--transition);
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.tag:hover {
+    background-color: #E8E9ED;
+}
+
+.accessibility-tag {
+    background-color: #D1E7DD;
+    color: #155724;
+}
+
+/* Button section always at the bottom */
+.job-card-footer {
+    margin-top: auto;
+    padding-top: 1.5rem;
+    text-align: center;
+}
+
+.cta-button {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    display: inline-block;
+    transition: var(--transition);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 10px rgba(30, 42, 71, 0.3);
+    width: 100%;
+    line-height: 1.5;
+}
+
+.cta-button:hover {
+    background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(30, 42, 71, 0.4);
+}
+.job-card {
+    /* existing styles ... */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.job-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(30, 42, 71, 0.2);
+}
+
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 4rem;
+    gap: 1rem;
+}
+
+.pagination button {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: #fff;
+    padding: 1rem 1.8rem;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.pagination button:hover {
+    background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+}
+
+.loader {
+    text-align: center;
+    padding: 3.5rem;
+    display: none;
+}
+
+.no-results {
+    text-align: center;
+    padding: 3.5rem;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    display: none;
+}
+
+footer {
+    background: linear-gradient(135deg, var(--background-dark) 0%, var(--primary-color) 100%);
+    color: #fff;
+    text-align: center;
+    padding: 3rem;
+    font-size: 1.2rem;
+    margin-top: 5rem;
+}
+
+.accessibility-menu {
+    position: fixed;
+    bottom: 2.5rem;
+    right: 2.5rem;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    z-index: 100;
+    transition: var(--transition);
+}
+
+.accessibility-menu:hover {
+    transform: scale(1.1);
+}
+
+.accessibility-panel {
+    position: fixed;
+    bottom: 100px;
+    right: 25px;
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 2.5rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    z-index: 100;
+    display: none;
+    width: 300px;
+}
+
+.accessibility-panel.active {
+    display: block;
+}
+
+.accessibility-option {
+    margin-bottom: 1.5rem;
+}
+
+.accessibility-option label {
+    display: flex;
+    align-items: center;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+.accessibility-option input {
+    margin-right: 10px;
+    transform: scale(1.2);
+}
+
+/* High contrast mode */
+body.high-contrast {
+    background-color: #000;
+    color: #fff;
+}
+
+body.high-contrast .job-card,
+body.high-contrast .search-container {
+    background-color: #222;
+    color: #fff;
+    border-color: #444;
+}
+
+body.high-contrast .job-title {
+    color: #FFD700;
+}
+
+body.high-contrast button,
+body.high-contrast .cta-button {
+    background: #FFD700;
+    color: #000;
+    font-weight: 700;
+}
+
+body.high-contrast .pagination button {
+    background: #FFD700;
+    color: #000;
+}
+
+body.high-contrast .tag {
+    background-color: #444;
+    color: #fff;
+}
+
+/* Search page specific styles */
+.find-opportunity-section h1 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.search-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+/* Specific styling for main search inputs */
+.search-form input[type="text"] {
+    width: 100%;
+    height: 60px;
+    font-size: 16px;
+    padding: 0 15px;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+}
+
+/* Force input sizes for job search */
+#job-keyword-input,
+#job-location-input {
+    width: 100% !important;
+    height: 60px !important;
+    font-size: 1.2rem !important;
+    box-sizing: border-box !important;
+}
+
+/* Larger text mode */
+body.large-text {
+    font-size: 1.3rem;
+}
+
+body.large-text .job-title {
+    font-size: 2rem;
+    max-height: 5.2rem; /* Adjusted height for larger text */
+}
+
+body.large-text .job-company {
+    font-size: 1.5rem;
+}
+
+body.large-text .job-location {
+    font-size: 1.3rem;
+}
+
+body.large-text .tag {
+    font-size: 1.2rem;
+}
+
+/* Media queries for responsive alignment */
+@media (max-width: 768px) {
+    .search-row {
+        flex-direction: column;
+    }
+    
+    .search-input,
+    .search-select {
+        flex: 1 1 100%;
+    }
+
+    .job-listings {
+        grid-template-columns: 1fr;
+    }
+
+    .search-container {
+        padding: 2rem;
+    }
+
+    .job-card {
+        padding: 1.5rem;
+    }
+    
+    .job-title {
+        font-size: 1.3rem;
+        max-height: 3.4rem;
+    }
+    
+    .job-company {
+        font-size: 1.1rem;
+    }
+    
+    .cta-button {
+        font-size: 1.1rem;
+        padding: 0.6rem 1.2rem;
+    }
+
+    footer {
+        font-size: 1.1rem;
+        padding: 2rem;
+    }
+    
+    .search-form {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        font-size: 1.8rem;
+        padding: 2rem 0;
+    }
+
+    .search-input,
+    .search-select {
+        padding: 1rem;
+        font-size: 1.1rem;
+    }
+
+    button {
+        padding: 1rem 1.5rem;
+        width: 100%;
+    }
+
+    .cta-button {
+        padding: 0.8rem 1.5rem;
+        font-size: 1.1rem;
+    }
+}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Accessible Job Opportunities for Disabled Students</h1>
+        <p>Find inclusive job opportunities tailored for your skills and accessibility needs</p>
+    </header>
+    
+    <div class="container">
+        <section class="search-container">
+            <h2>Find Your Next Opportunity</h2>
+            <div class="search-row">
+                <div class="search-input">
+                    <input type="text" id="keyword-search" placeholder="Job title, skill, or keyword">
+                </div>
+                <div class="search-input">
+                    <input type="text" id="location-search" placeholder="City, state, or remote">
+                </div>
+                <div class="search-input" style="max-width: 200px;">
+                    <button id="search-button">Search Jobs</button>
+                </div>
+            </div>
+            <div class="filter-options">
+                <div class="filter-group">
+                    <label for="job-type">Job Type</label>
+                    <select id="job-type">
+                        <option value="">All Types</option>
+                        <option value="full-time">Full-time</option>
+                        <option value="part-time">Part-time</option>
+                        <option value="internship">Internship</option>
+                        <option value="contract">Contract</option>
+                        <option value="remote">Remote</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="experience-level">Experience Level</label>
+                    <select id="experience-level">
+                        <option value="">All Levels</option>
+                        <option value="entry">Entry Level</option>
+                        <option value="mid">Mid-Level</option>
+                        <option value="senior">Senior Level</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="accessibility-features">Accessibility Features</label>
+                    <select id="accessibility-features">
+                        <option value="">All Features</option>
+                        <option value="screen-reader">Screen Reader Compatible</option>
+                        <option value="physical">Physical Accessibility</option>
+                        <option value="flexible">Flexible Schedule</option>
+                        <option value="sensory">Sensory Accommodations</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="job-source">Job Source</label>
+                    <select id="job-source">
+                        <option value="">All Sources</option>
+                        <option value="disabilitytalent" selected>DisabilityTalent</option>
+                        <option value="indeed">Indeed</option>
+                        <option value="linkedin">LinkedIn</option>
+                        <option value="glassdoor">Glassdoor</option>
+                        <option value="usajobs">USAJobs</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+        
+        <div class="loader" id="loader">
+            <h3>Searching for jobs...</h3>
+            <p>This may take a moment as we search multiple sources</p>
+        </div>
+        
+        <div class="no-results" id="no-results">
+            <h3>No jobs found matching your criteria</h3>
+            <p>Try adjusting your search terms or filters</p>
+        </div>
+        
+        <section class="job-listings" id="job-listings">
+            <!-- Job listings will be dynamically inserted here -->
+        </section>
+        
+        <div class="pagination" id="pagination">
+            <button id="prev-page" disabled>Previous</button>
+            <span id="page-info">Page 1 of 1</span>
+            <button id="next-page" disabled>Next</button>
+        </div>
+    </div>
+    
+    <div class="accessibility-menu" id="accessibility-toggle">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M12 8v8"></path>
+            <path d="M8 12h8"></path>
+        </svg>
+    </div>
+    
+    <div class="accessibility-panel" id="accessibility-panel">
+        <h3>Accessibility Options</h3>
+        <div class="accessibility-option">
+            <input type="checkbox" id="high-contrast">
+            <label for="high-contrast">High Contrast Mode</label>
+        </div>
+        <div class="accessibility-option">
+            <input type="checkbox" id="large-text">
+            <label for="large-text">Larger Text</label>
+        </div>
+        <div class="accessibility-option">
+            <input type="checkbox" id="screen-reader-mode">
+            <label for="screen-reader-mode">Screen Reader Optimized</label>
+        </div>
+    </div>
+    
+    <footer>
+        <p>© 2025 Accessible Job Search Platform for Disabled Students</p>
+        <p><a href="#" style="color: white;">About Us</a> | <a href="#" style="color: white;">Privacy Policy</a> | <a href="#" style="color: white;">Contact</a></p>
+    </footer>
+
+    <script>
+        // Define API endpoint (where the PHP file will be located)
+        const API_URL = 'get_jobs.php';
+        
+        // Job source information
+        const jobSources = {
+            disabilitytalent: {
+                name: "DisabilityTalent",
+                url: "https://jobs.disabilitytalent.org"
+            },
+            indeed: {
+                name: "Indeed",
+                url: "https://www.indeed.com"
+            },
+            linkedin: {
+                name: "LinkedIn",
+                url: "https://www.linkedin.com/jobs"
+            },
+            glassdoor: {
+                name: "Glassdoor",
+                url: "https://www.glassdoor.com"
+            },
+            usajobs: {
+                name: "USAJobs",
+                url: "https://www.usajobs.gov"
+            }
+        };
+
+        // State management
+        let currentJobs = [];
+        let currentPage = 1;
+        const jobsPerPage = 6;
+        let totalPages = 1;
+        
+        // DOM elements
+        const jobListings = document.getElementById('job-listings');
+        const loader = document.getElementById('loader');
+        const noResults = document.getElementById('no-results');
+        const pagination = document.getElementById('pagination');
+        const pageInfo = document.getElementById('page-info');
+        const prevPageBtn = document.getElementById('prev-page');
+        const nextPageBtn = document.getElementById('next-page');
+        
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set up event listeners
+            document.getElementById('search-button').addEventListener('click', function() {
+                currentPage = 1;
+                searchJobs();
+            });
+            
+            document.getElementById('accessibility-toggle').addEventListener('click', toggleAccessibilityPanel);
+            document.getElementById('high-contrast').addEventListener('change', toggleHighContrast);
+            document.getElementById('large-text').addEventListener('change', toggleLargeText);
+            document.getElementById('screen-reader-mode').addEventListener('change', toggleScreenReaderMode);
+            
+            prevPageBtn.addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    searchJobs();
+                }
+            });
+            
+            nextPageBtn.addEventListener('click', () => {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    searchJobs();
+                }
+            });
+            
+            // Initial job search
+            searchJobs();
+        });
+
+        // Function to search for jobs
+        function searchJobs() {
+            const keywords = document.getElementById('keyword-search').value;
+            const location = document.getElementById('location-search').value;
+            const jobType = document.getElementById('job-type').value;
+            const experienceLevel = document.getElementById('experience-level').value;
+            const accessibilityFeatures = document.getElementById('accessibility-features').value;
+            const jobSource = document.getElementById('job-source').value;
+            
+            // Show loader
+            jobListings.innerHTML = '';
+            loader.style.display = 'block';
+            noResults.style.display = 'none';
+            
+            // Build API query
+            let url = `${API_URL}?page=${currentPage}&per_page=${jobsPerPage}`;
+            
+            if (keywords) url += `&keywords=${encodeURIComponent(keywords)}`;
+            if (location) url += `&location=${encodeURIComponent(location)}`;
+            if (jobType) url += `&job_type=${encodeURIComponent(jobType)}`;
+            
+            // Make API request
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Update state with returned data
+                    currentJobs = data.jobs;
+                    totalPages = data.pagination.totalPages;
+                    
+                    // Display jobs
+                    displayJobs();
+                    
+                    // Hide loader
+                    loader.style.display = 'none';
+                })
+                .catch(error => {
+                    console.error('Error fetching jobs:', error);
+                    loader.style.display = 'none';
+                    noResults.style.display = 'block';
+                    noResults.innerHTML = `
+                        <h3>Error loading jobs</h3>
+                        <p>There was a problem connecting to the database. Please try again later.</p>
+                    `;
+                });
+        }
+
+        // Function to display jobs
+        function displayJobs() {
+            jobListings.innerHTML = '';
+            
+            if (currentJobs.length === 0) {
+                noResults.style.display = 'block';
+                pagination.style.display = 'none';
+                return;
+            }
+            
+            // Update pagination controls
+            pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
+            prevPageBtn.disabled = currentPage === 1;
+            nextPageBtn.disabled = currentPage === totalPages;
+            pagination.style.display = totalPages > 1 ? 'flex' : 'none';
+            
+            // Create job cards
+            currentJobs.forEach(job => {
+                const jobCard = document.createElement('div');
+                jobCard.className = 'job-card';
+                jobCard.setAttribute('aria-labelledby', `job-title-${job.id}`);
+                
+                // Calculate days since posting if date_posted is available
+                let postedDate = '';
+                if (job.date_posted) {
+                    try {
+                        const postDate = new Date(job.date_posted);
+                        const today = new Date();
+                        const daysAgo = Math.floor((today - postDate) / (1000 * 60 * 60 * 24));
+                        postedDate = `<p><small>Posted ${daysAgo} days ago</small></p>`;
+                    } catch (e) {
+                        postedDate = `<p><small>${job.date_posted}</small></p>`;
+                    }
+                }
+                
+                // Determine source name
+                const sourceName = job.source && jobSources[job.source] ? 
+                    jobSources[job.source].name : 'DisabilityTalent';
+                
+                // Build job tags
+                let tagsHtml = '';
+                if (job.tags && job.tags.length) {
+                    tagsHtml = job.tags.map(tag => `<span class="tag">${tag}</span>`).join('');
+                }
+                
+                // Build accessibility features
+                let accessibilityHtml = '';
+                if (job.accessibilityFeatures && job.accessibilityFeatures.length) {
+                    accessibilityHtml = job.accessibilityFeatures.map(feature => {
+                        let featureName = feature;
+                        switch(feature) {
+                            case "screen-reader": featureName = "Screen Reader Compatible"; break;
+                            case "physical": featureName = "Physical Accessibility"; break;
+                            case "flexible": featureName = "Flexible Schedule"; break;
+                            case "sensory": featureName = "Sensory Accommodations"; break;
+                        }
+                        return `<span class="tag accessibility-tag">${featureName}</span>`;
+                    }).join('');
+                }
+                
+                jobCard.innerHTML = `
+                    <h3 class="job-title" id="job-title-${job.id}">${job.title}</h3>
+                    <span class="job-company">${job.company}</span>
+                    <span class="job-location">${job.location}</span>
+                    <p>${job.description || 'No description available.'}</p>
+                    <div class="job-tags">
+                        ${tagsHtml}
+                        ${accessibilityHtml}
+                    </div>
+                    ${postedDate}
+                    <p><small>Source: ${sourceName}</small></p>
+                    <a href="${job.link}" class="cta-button" target="_blank" rel="noopener">View Job</a>
+                `;
+                
+                jobListings.appendChild(jobCard);
+            });
+            
+            noResults.style.display = 'none';
+        }
+
+        // Accessibility functions
+        function toggleAccessibilityPanel() {
+            const panel = document.getElementById('accessibility-panel');
+            panel.classList.toggle('active');
+        }
+        
+        function toggleHighContrast(e) {
+            document.body.classList.toggle('high-contrast', e.target.checked);
+        }
+        
+        function toggleLargeText(e) {
+            document.body.classList.toggle('large-text', e.target.checked);
+        }
+        
+        function toggleScreenReaderMode(e) {
+            // Add screen reader optimizations here
+            if (e.target.checked) {
+                document.querySelectorAll('.job-card').forEach(card => {
+                    card.setAttribute('tabindex', '0');
+                });
+            } else {
+                document.querySelectorAll('.job-card').forEach(card => {
+                    card.removeAttribute('tabindex');
+                });
+            }
+        }
+    </script>
+</body>
+</html>
