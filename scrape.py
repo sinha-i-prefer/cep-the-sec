@@ -1,6 +1,9 @@
 import mysql.connector
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from bs4 import BeautifulSoup
 import time
 
@@ -29,7 +32,6 @@ CREATE TABLE IF NOT EXISTS jobs (
 """)
 print("Table check/creation done.")
 
-
 # ---------- Web Scraping Setup ----------
 options = Options()
 options.add_argument("--headless")
@@ -42,12 +44,44 @@ driver = webdriver.Chrome(options=options)
 
 url = "https://jobs.disabilitytalent.org/jobs/?l=India&p=1&s=400"
 driver.get(url)
-time.sleep(5)
+time.sleep(3)  # Initial page load
 
+# ---------- Handle "Load More" Button ----------
+max_clicks = 10  # Set a limit to prevent infinite clicking
+click_count = 0
+
+while click_count < max_clicks:
+    try:
+        # Wait for button to be clickable
+        load_more_button = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.CLASS_NAME, "load-more"))
+        )
+        
+        # Scroll to the button (helps in some cases)
+        driver.execute_script("arguments[0].scrollIntoView();", load_more_button)
+        time.sleep(1)
+        
+        # Click the button
+        load_more_button.click()
+        click_count += 1
+        print(f"Clicked 'Load More' button {click_count} time(s)")
+        
+        # Wait for new content to load
+        time.sleep(3)
+        
+        # Check if button is still present
+        if not driver.find_elements(By.CLASS_NAME, "load-more"):
+            print("No more 'Load More' button found. Ending pagination.")
+            break
+            
+    except Exception as e:
+        print(f"Error clicking 'Load More': {str(e)}")
+        break
+
+# ---------- Scraping and DB Insertion ----------
 soup = BeautifulSoup(driver.page_source, 'html.parser')
 driver.quit()
 
-# ---------- Scraping and DB Insertion ----------
 jobs = []
 
 for job in soup.find_all('article', class_='listing-item'):
